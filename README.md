@@ -1,3 +1,3 @@
-# ForecastNucleoFramework test
+Master Degree in Computer Engineering for Robotics and Smart Industry - A.Y. 2021/2022
 
-Tests for the [ForecastNucleoFramework](https://gitlab.com/altairLab/elasticteam/forecastnucleoframework) library
+Forecasr Nucleo Framework code for the Robotic Programming and control course
