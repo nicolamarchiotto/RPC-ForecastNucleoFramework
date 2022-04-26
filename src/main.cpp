@@ -5,6 +5,7 @@
 #include <forecast/platforms/RPC/RPCApp.hpp>
 #include <debug.hpp>
 #include "../include/PosController.hpp"
+#include "../include/VelController.hpp"
 
 int main()
 {
@@ -16,10 +17,10 @@ int main()
     app.setLogger([](float motorRef, const forecast::RPCHardware *hw,
                      const forecast::Controller *motor)
                   { return std::vector<float>{
-                        // hw->getTauM(),
-                        hw->getThetaM(),
                         motorRef,
-                        // hw->getDThetaM(),
+                        // hw->getTauM(),
+                        // hw->getThetaM(),
+                        hw->getDThetaM(),
                         // hw->getDDThetaM(),
                         // hw->getTauS(),
                     }; });
@@ -27,7 +28,7 @@ int main()
     // Hard-coded reference for the motor
     app.setMotorRefGen([](const forecast::RPCHardware *hw)
                        {
-        float ref = M_PI/2.0f;
+        float ref = 100;
         // static float t = 0.0;
 
         // // STEP
@@ -52,7 +53,7 @@ int main()
     // Motor controller, in TODO define robot controller
     // forecast::PosController *ctrl=new forecast::PosController();
 
-    app.setMotor(new forecast::PosController());
+    app.setMotor(new forecast::VelController());
 
     // Handshake with the PC
     app.waitConnection();
