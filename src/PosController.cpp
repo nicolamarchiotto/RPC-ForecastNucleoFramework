@@ -4,13 +4,7 @@ using namespace forecast;
 
 PosController::PosController() : Controller(3) {}
 
-PosController::PosController(float p_kp,
-                             float p_kd,
-                             float p_ki)
-    : Controller(3),
-      p_kp(p_kp),
-      p_kd(p_kd),
-      p_ki(p_ki)
+PosController::PosController(float p_kp, float p_kd, float p_ki) : Controller(3), p_kp(p_kp), p_kd(p_kd), p_ki(p_ki)
 {
     Controller::initialized = true;
 }
@@ -37,7 +31,7 @@ float PosController::process(const IHardware *hw,
 {
     theta = hw->getThetaM();
 
-    /* Get the equilibrium state */
+    /* Initialzation of the first cycle */
     if (once)
     {
         once = false;
@@ -51,15 +45,15 @@ float PosController::process(const IHardware *hw,
     errPast = err;
     ierr += err * hw->getDT();
 
-    /* POSITION LOOP */
-    out = p_kp * err + p_kd * derr +p_ki*ierr;
-    
-    //parameters at lecture: 
-    // p_kp:10,
-    // p_kd:0.25,
-    // p_ki:0.1,
-    // freq:2000
-    
+    /* POSITION PID CONTROLLER*/
+    out = p_kp * err + p_kd * derr + p_ki * ierr;
+
+    // parameters at lecture:
+    //  p_kp:10,
+    //  p_kd:0.25,
+    //  p_ki:0.1,
+    //  freq:2000
+
     return out;
 }
 

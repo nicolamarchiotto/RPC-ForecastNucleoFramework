@@ -5,35 +5,29 @@
 
 namespace forecast
 {
-
-    /**
-     * @brief Pos Control class
-     **/
     class PosController : public Controller
     {
     public:
         /**
-         * @brief Pos control constructor
+         * @brief Construct a new controller object.
          **/
         PosController();
-        /**
-     * @brief Construct a new Pos object. This constructor
-    initialize,
-     * the controller.
-     * @param p_kp
-     * @param p_kd
-     * @param p_ki
 
-    **/
+        /**
+         * @brief Construct a new controller object. This constructor initialize the controller.
+         * @param p_kp
+         * @param p_kd
+         * @param p_ki
+         **/
         PosController(float p_kp, float p_kd, float p_ki);
 
         /**
          * @brief Pos control initialization
          *
-         * @param a vector containing the constants KP , K_DES
-         * in this order
+         * @param a vector containing the constants representing the parameters
          **/
         virtual bool init(const std::vector<float> &params) override;
+
         /**
          * @brief Get Return the names of the parameters.
          *
@@ -41,6 +35,9 @@ namespace forecast
          */
         virtual std::vector<std::string> getParamNames() const override;
 
+        /**
+         * @brief Implements the control law
+         */
         virtual float process(const IHardware *hw,
                               float ref,
                               float dref = 0,
@@ -63,6 +60,5 @@ namespace forecast
 
         float out;
     };
-} // namespace forecast
-
-#endif // POS_CONTROLLER_H
+}
+#endif
